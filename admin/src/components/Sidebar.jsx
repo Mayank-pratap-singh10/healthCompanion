@@ -20,7 +20,7 @@ const Sidebar = () => {
                     <p>Appointment</p>
 
                 </NavLink>
-                <NavLink className={({isActive})=> `flex items-center gap-3 px-3 py-3.5 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-sky-700" : ""} `} to={'/add-docotor'}>
+                <NavLink className={({isActive})=> `flex items-center gap-3 px-3 py-3.5 md:px-9 md:min-w-72 cursor-pointer ${isActive ? "bg-[#F2F3FF] border-r-4 border-sky-700" : ""} `} to={'/add-doctor'}>
                     <img src={assets.add_icon} alt="" />
                     <p>Add Doctor</p>
 
