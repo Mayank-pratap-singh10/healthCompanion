@@ -1,0 +1,46 @@
+import React, { useContext } from 'react'
+import Login from './pages/login'
+import { ToastContainer, toast } from 'react-toastify';
+import { AdminContext } from './context/adminContext';
+import Navbar from './components/Navbar';
+import Sidebar from './components/Sidebar';
+import {Route,Routes} from "react-router-dom"
+import Dashboard from './pages/Admin/Dashboard';
+import AllAppointments from './pages/Admin/AllAppointments';
+import AddDoctor from './pages/Admin/AddDoctor';
+import DoctorsList from './pages/Admin/DoctorsList';
+
+
+const App = () => {
+  const {atoken} =useContext(AdminContext)
+  return atoken? (
+    <div className='bg-[#F8F9FD]' >
+      
+      <ToastContainer/>
+      <Navbar/>
+      <div className='flex items-start'>
+      <Sidebar/>
+      <Routes>
+        <Route path='/' element={<></>}>
+        <Route path='/admin-dashboard' element={<Dashboard/>}></Route>
+        <Route path='/all-appointments' element={<AllAppointments/>}></Route>
+        <Route path='/add-docotor' element={<AddDoctor/>}></Route>
+        <Route path='/doctor-list' element={<DoctorsList/>}></Route>
+
+        </Route>
+      </Routes>
+
+      </div>
+
+      
+      
+    </div>
+  ):(
+    <>
+    <Login/>
+      <ToastContainer/>
+    </>
+  )
+}
+
+export default App

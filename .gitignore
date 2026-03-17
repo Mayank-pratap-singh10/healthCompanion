@@ -1,0 +1,81 @@
+# ======================
+# Node.js / Backend
+# ======================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Logs
+logs/
+*.log
+
+# Build folders
+dist/
+build/
+
+# ======================
+# React / Frontend
+# ======================
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+
+# Vite
+.vite/
+
+# ======================
+# Python / ML
+# ======================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# ======================
+# Database
+# ======================
+*.sqlite
+*.db
+
+# MongoDB dump
+dump/
+
+# ======================
+# OS Files
+# ======================
+.DS_Store
+Thumbs.db
+
+# ======================
+# IDE / Editor
+# ======================
+.vscode/
+.idea/
+
+# ======================
+# Temporary files
+# ======================
+tmp/
+temp/
+
+# ======================
+# Misc
+# ======================
+coverage/
+*.tgz
+*.bak
