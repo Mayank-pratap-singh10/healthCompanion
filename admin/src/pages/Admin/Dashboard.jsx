@@ -4,6 +4,8 @@ const Dashboard = () => {
   return (
     <div>
       dashboard
+      <h1>Its a Dashboard</h1>
+      
     </div>
   )
 }

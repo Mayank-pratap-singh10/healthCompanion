@@ -132,7 +132,7 @@ const loginAdmin = async (req, res) => {
     });
   }
 };
-
+// API FOR ALL DOCTORS FOR ADMIN PANEL
 const allDoctors=async (req,res)=>{
     try {
         const doctors =await Doctor.find({  }).select("-password")
