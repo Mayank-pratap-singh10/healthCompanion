@@ -1,0 +1,29 @@
+import jwt from "jsonwebtoken"
+
+
+const authUser =async (req , res, next)=>{
+    try {
+        const {token} = req.headers
+        if(!token){
+            return res.json({
+                success: false,
+                message:" Not Authorised Try Again"
+            })
+        }
+        const verifyToken=jwt.verify(token,process.env.JWT_SECRET)
+        req.body.userId=verifyToken.id
+        next()
+    
+        
+    } catch (error) {
+        
+        console.log(error)
+        res.json({
+            success: false,
+            message:error.message
+        })
+    }
+
+
+ }
+  export default authUser

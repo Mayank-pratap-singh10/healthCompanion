@@ -1,11 +1,15 @@
 import { Moon, Sun } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate,NavLink } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 
+
 import { assets } from "../assets/assets.js";
+import { AppContext } from "../context/AppContext.jsx";
+
 
 export default function Navbar() {
   //const { user, logout } = useContext(AuthContext);
+  
 
   const [darkMode, setDarkMode] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
@@ -33,7 +37,11 @@ export default function Navbar() {
   };
   const navigate = useNavigate();
   const [showmenu, setShowMenu] = useState(false);
-  const [token, setToken] = useState(true);
+  const {token,setToken} =useContext(AppContext)
+  const logout = ()=>{
+    setToken(false)
+    localStorage.removeItem("token")
+  }
   return (
     <>
       <nav className="sticky top-0 z-50 bg-white dark:bg-gray-800 shadow-md">
@@ -94,7 +102,7 @@ export default function Navbar() {
                       >
                         MyAppointments
                       </p>
-                      <p className="hover:text-black cursor-pointer">Logout</p>
+                      <p onClick={logout} className="hover:text-black cursor-pointer">Logout</p>
                     </div>
                   </div>
                 </div>
