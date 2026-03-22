@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/mongodb.js";
 import connectCloudinary from "./config/cloudinary.js";
 import adminRouter from "./routes/adminRoutes.js";
+import userRouter from "./routes/userRoutes.js";
 
 
 //api config
@@ -21,6 +22,8 @@ app.use(cors());
 
 //api endPoints
 app.use("/api/admin",adminRouter)
+
+app.use("/api/user",userRouter)
 app.get("/", (req, res) => {
   res.send("Hello World! ");
 });

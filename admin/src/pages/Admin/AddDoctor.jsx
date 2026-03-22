@@ -94,16 +94,16 @@ const AddDoctor = () => {
             <div className="flex-1 flex flex-col gap-1">
               <p>Experience</p>
               <select onChange={(e)=> setExperience(e.target.value)} value={experience} className="border  rounded px-3 py-2" name="" id="">
-                <option value="1 Year"> 1Year </option>
-                <option value="2 Year"> 2Year </option>
-                <option value="3 Year"> 3Year </option>
-                <option value="4 Year"> 4Year </option>
-                <option value="5 Year"> 5Year </option>
-                <option value="6 Year"> 6Year </option>
-                <option value="7 Year"> 7Year </option>
-                <option value="8 Year"> 8Year </option>
-                <option value="9 Year"> 9Year </option>
-                <option value="10 Year"> 10Year </option>
+                <option value="1 "> 1Year </option>
+                <option value="2 "> 2Year </option>
+                <option value="3 "> 3Year </option>
+                <option value="4 "> 4Year </option>
+                <option value="5 "> 5Year </option>
+                <option value="6 "> 6Year </option>
+                <option value="7 "> 7Year </option>
+                <option value="8 "> 8Year </option>
+                <option value="9 "> 9Year </option>
+                <option value="10 "> 10Year </option>
               </select>
              
             </div>
@@ -121,6 +121,7 @@ const AddDoctor = () => {
                   <option value="Dermatologist">Dermatologist</option>
                   <option value="Pediatrician">Pediatrician</option>
                   <option value="Gastroenterologist">Gastroenterologist</option>
+                  <option value="Neurologist">Neurologist</option>
                 </select>
               </div>
               <div className="flex-1 flex flex-col gap-1">
