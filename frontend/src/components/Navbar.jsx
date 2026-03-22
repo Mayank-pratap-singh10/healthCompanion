@@ -97,7 +97,7 @@ export default function Navbar() {
                         My Profile
                       </p>
                       <p
-                        onClick={() => navigate("/my-appointments")}
+                        onClick={() => navigate("/my-appointment")}
                         className="hover:text-black cursor-pointer"
                       >
                         MyAppointments
@@ -108,7 +108,7 @@ export default function Navbar() {
                 </div>
               ) : (
                 <button
-                  onClick={() => setShowAuth(true)}
+                  onClick={() => navigate("/login")}
                   className="bg-sky-600 hover:bg-sky-700 text-white px-5 py-2 rounded-lg hidden md:block"
                 >
                   Create Account
@@ -121,10 +121,10 @@ export default function Navbar() {
                   <img onClick={()=>setShowMenu(false)} src={assets.cross_icon} alt="" />
                 </div>
                 <ul>
-                  <navlink>Home</navlink>
-                  <navlink>All Doctors</navlink>
-                  <navlink>About</navlink>
-                  <navlink>Contact</navlink>
+                  <NavLink>Home</NavLink>
+                  <NavLink>All Doctors</NavLink>
+                  <NavLink>About</NavLink>
+                  <NavLink>Contact</NavLink>
                 </ul>
               </div>
             </div>

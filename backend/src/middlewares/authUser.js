@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken"
 const authUser =async (req , res, next)=>{
     try {
         const {token} = req.headers
+        
         if(!token){
             return res.json({
                 success: false,
@@ -11,7 +12,9 @@ const authUser =async (req , res, next)=>{
             })
         }
         const verifyToken=jwt.verify(token,process.env.JWT_SECRET)
-        req.body.userId=verifyToken.id
+
+        if (!req.body) req.body = {}          
+    req.body.userId = verifyToken.id 
         next()
     
         

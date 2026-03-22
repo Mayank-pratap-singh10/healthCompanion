@@ -1,19 +1,22 @@
 import React,{ useContext ,useState,useEffect}  from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { AppContext } from '../context/AppContext'; 
 import { assets } from '../assets/assets';
 import RelatedDoctors from '../components/RelatedDoctors';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const appointment = () => {
   const { docId } = useParams(); 
-  const { doctors ,currencySymbol} = useContext(AppContext);
+  const { doctors ,currencySymbol,backendUrl,token,getDoctorsData} = useContext(AppContext);
   const daysOfWeek=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
   
   const [docInfo, setDocInfo] = useState(null);
   const [docSlots, setDocSlots] = useState([]);
   const [slotIndex, setSlotIndex] = useState(0);
   const [slotTime, setSlotTime] = useState("");
+  const navigate =useNavigate()
   
   const fetchDocInfo= async ()=>{
      const docInfo= doctors.find(doc=> doc._id === docId)
@@ -49,6 +52,36 @@ const appointment = () => {
       }
       setDocSlots(prev=> [...prev,timeslots])
 
+    }
+
+  }
+
+  const bookAppointment=async()=>{
+    if(!token){
+      toast.warn("Login to Book Appointment")
+      return navigate("/login")
+
+    }
+    try {
+      const date=docSlots[slotIndex][0].dateTime
+      let day=date.getDate()
+      let month=date.getMonth()+1 
+      let year =date.getFullYear()
+      const slotDate=day + "_" + month + "_" + year
+      const {data}=await axios.post(backendUrl + "/api/user/book-appointment",{docId,slotDate,slotTime},{headers:{token}})
+      if(data.success){
+        toast.success(data.message)
+        getDoctorsData()
+        navigate("/my-appointment")
+
+      }else{
+        toast.error(data.message)
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error(error.message)
+
+      
     }
 
   }
@@ -109,7 +142,7 @@ const appointment = () => {
             </p>
           ))}
         </div>
-        <button className='bg-sky-100 text-sky-700 text-md font-dark px-14 py-3 rounded-full my-6'>Book an Appointment </button>
+        <button onClick={bookAppointment} className='bg-sky-100 text-sky-700 text-md font-dark px-14 py-3 rounded-full my-6'>Book an Appointment </button>
 
       </div>
       <RelatedDoctors docId={docId} speciality={docInfo.speciality}/>
