@@ -14,7 +14,7 @@ const authUser =async (req , res, next)=>{
         const verifyToken=jwt.verify(token,process.env.JWT_SECRET)
 
         if (!req.body) req.body = {}          
-    req.body.userId = verifyToken.id 
+        req.body.userId = verifyToken.id 
         next()
     
         

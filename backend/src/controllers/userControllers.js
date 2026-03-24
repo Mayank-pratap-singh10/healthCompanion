@@ -196,9 +196,7 @@ const registerUser =async(req,res)=>{
         
       } catch (error) {
         console.log(error);
-        console.log("FULL ERROR:", error)  // add this
-  console.log("ERROR NAME:", error.name)
-  console.log("ERROR MSG:", error.message)
+        
 
     res.json({
       success: false,
@@ -209,4 +207,26 @@ const registerUser =async(req,res)=>{
 
     }
 
-export {registerUser,loginUser,getProfile, updateProfile,bookAppointment}
+
+    // api for my-appointment page
+
+    const listAppointment =async (req,res)=>{
+      try {
+        const {userId}=req.body
+        const appointments=await Appointment.find({userId})
+        res.json({success:true,appointments})
+        
+      } catch (error) {
+        console.log(error);
+        
+
+    res.json({
+      success: false,
+      message: error.message,
+    });
+        
+      }
+
+    }
+
+export {registerUser,loginUser,getProfile, updateProfile,bookAppointment,listAppointment}

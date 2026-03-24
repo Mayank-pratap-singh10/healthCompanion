@@ -44,10 +44,15 @@ const appointment = () => {
       let timeslots=[]
       while(currentDate < endTime){
         let formatedTime=currentDate.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})
-        timeslots.push({
+
+       
+       timeslots.push({
           dateTime: new Date(currentDate),
           time:formatedTime
         })
+
+
+        
         currentDate.setMinutes(currentDate.getMinutes()+30)
       }
       setDocSlots(prev=> [...prev,timeslots])
