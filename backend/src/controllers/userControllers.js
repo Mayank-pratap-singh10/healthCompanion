@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 import {v2 as cloudinary} from "cloudinary"
 import Doctor from "../models/doctorModels.js"
 import Appointment from "../models/appointmentModels.js"
+import App from "../../../frontend/src/App.jsx"
 
 
 const registerUser =async(req,res)=>{
@@ -229,4 +230,42 @@ const registerUser =async(req,res)=>{
 
     }
 
-export {registerUser,loginUser,getProfile, updateProfile,bookAppointment,listAppointment}
+    const cancelAppointment =async ()=>{
+      try {
+
+        const {userId,appointmentId}=req.body
+        const appointmentData =await Appointment.findById(appointmentId)
+
+        // verify appoinment use
+        if(appointmentData.userId != userId){
+          res.json({success:false,message:"Unauthorized Action"})
+        }
+        await Appointment.findByIdAndUpdate(appointmentId,{cancelled:true})
+
+        // releasing doctor slot
+
+        const {docId,slotDate,slotTime} =appointmentData
+        const doctorData= await Appointment.findById(docId)
+        let slotsBooked =doctorData.slotsBooked
+        slotsBooked[slotDate]=slotsBooked[slotDate].filter(e => e!==slotTime)
+        await Doctor.findByIdAndUpdate(docId,{slotsBooked})
+        res.json({
+          success:true,
+          message:"Appointment Cancelled"
+        })
+
+
+        
+      } catch (error) {
+        console.log(error);
+        
+
+    res.json({
+      success: false,
+      message: error.message,
+    });
+        
+      }
+    }
+
+export {registerUser,loginUser,getProfile, updateProfile,bookAppointment,listAppointment,cancelAppointment}
