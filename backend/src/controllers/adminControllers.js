@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { v2 as cloudinary } from "cloudinary";
 import Doctor from "../models/doctorModels.js";
 import jwt from "jsonwebtoken";
+import Appointment from "../models/appointmentModels.js";
 // API FOR ADDING DOCTOR
 
 const addDoctor = async (req, res) => {
@@ -154,4 +155,22 @@ const allDoctors=async (req,res)=>{
 }
 
 
-export { addDoctor, loginAdmin,allDoctors };
+// api to get all appointments list 
+
+const appointmentAdmin= async (req,res)=>{
+  try {
+    const appointments=await Appointment.find({})
+    res.json({success:true,appointments})
+  } catch (error) {
+    console.log(error);
+
+    res.json({
+      success: false,
+      message: error.message,
+    });
+    
+  }
+}
+
+
+export { addDoctor, loginAdmin,allDoctors,appointmentAdmin };
